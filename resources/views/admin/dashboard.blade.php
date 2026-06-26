@@ -69,6 +69,32 @@
                     <div class="text-sm text-slate-500">ดู เปลี่ยนสถานะ และลบรถ</div>
                 </div>
             </a>
+
+            <a href="{{ route('admin.rentals.index') }}"
+                class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md hover:border-indigo-200 transition flex items-center gap-4">
+                <span class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center">
+                    <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5.5 2a.5.5 0 0 1 .5.5V3h8v-.5a.5.5 0 0 1 1 0V3h.5A1.5 1.5 0 0 1 17 4.5v10A1.5 1.5 0 0 1 15.5 16h-11A1.5 1.5 0 0 1 3 14.5v-10A1.5 1.5 0 0 1 4.5 3H5v-.5a.5.5 0 0 1 .5-.5zM4.5 6.5v8h11v-8h-11z" />
+                    </svg>
+                </span>
+                <div>
+                    <div class="font-bold text-slate-900">ดูการจอง</div>
+                    <div class="text-sm text-slate-500">ดูและจัดการสถานะการเช่า</div>
+                </div>
+            </a>
+
+            <a href="{{ route('admin.feedbacks.index') }}"
+                class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md hover:border-indigo-200 transition flex items-center gap-4">
+                <span class="w-12 h-12 rounded-xl bg-rose-500 text-white flex items-center justify-center">
+                    <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.05 3.69c.3-.92 1.6-.92 1.9 0l1.07 3.29h3.46c.97 0 1.37 1.24.59 1.81l-2.8 2.03 1.07 3.29c.3.92-.75 1.69-1.54 1.12L10 14.99l-2.8 2.03c-.79.57-1.84-.2-1.54-1.12l1.07-3.29-2.8-2.03c-.78-.57-.38-1.81.59-1.81h3.46l1.07-3.29z" />
+                    </svg>
+                </span>
+                <div>
+                    <div class="font-bold text-slate-900">รีวิว</div>
+                    <div class="text-sm text-slate-500">ดูและลบรีวิวจากลูกค้า</div>
+                </div>
+            </a>
         </div>
     </div>
 </x-admin-layout>

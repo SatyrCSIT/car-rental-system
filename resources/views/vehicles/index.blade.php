@@ -67,13 +67,18 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($vehicles as $vehicle)
                 <div class="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                    {{-- ส่วนบน: gradient + ไอคอนรถ --}}
-                    <div class="relative h-44 bg-linear-to-br from-indigo-500 to-indigo-700 overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <svg class="w-24 h-24 text-white/90 group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M18.92 6c-.2-.58-.76-1-1.42-1h-11c-.66 0-1.21.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8z" />
-                            </svg>
-                        </div>
+                    {{-- ส่วนบน: รูปจริง หรือ gradient + ไอคอนรถ (ถ้ายังไม่มีรูป) --}}
+                    <div class="relative h-44 overflow-hidden">
+                        @if ($vehicle->image_path)
+                            <img src="{{ asset('storage/' . $vehicle->image_path) }}" alt="{{ $vehicle->brand }} {{ $vehicle->model }}"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        @else
+                            <div class="w-full h-full bg-linear-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
+                                <svg class="w-24 h-24 text-white/90 group-hover:scale-110 transition duration-300" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M18.92 6c-.2-.58-.76-1-1.42-1h-11c-.66 0-1.21.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8z" />
+                                </svg>
+                            </div>
+                        @endif
                         {{-- ป้ายประเภท --}}
                         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">{{ $vehicle->vehicleType->name }}</span>
                         {{-- ป้ายสถานะ --}}
@@ -115,4 +120,32 @@
             @endforelse
         </div>
     </section>
+
+    {{-- ===== เสียงจากลูกค้า ===== --}}
+    @if ($feedbacks->isNotEmpty())
+        <section class="bg-white border-t border-slate-100">
+            <div class="max-w-6xl mx-auto px-4 py-14">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-900">เสียงจากลูกค้า</h2>
+                    <p class="text-slate-500 mt-2">รีวิวจริงจากผู้ใช้บริการของเรา</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach ($feedbacks as $feedback)
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                            <div class="text-amber-400 text-lg">
+                                @for ($i = 1; $i <= 5; $i++){{ $i <= $feedback->rating ? '★' : '☆' }}@endfor
+                            </div>
+                            <p class="text-slate-600 text-sm mt-3">{{ $feedback->message }}</p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-bold">
+                                    {{ mb_substr($feedback->user->name, 0, 1) }}
+                                </span>
+                                <span class="text-sm font-medium text-slate-700">{{ $feedback->user->name }}</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 </x-layout>

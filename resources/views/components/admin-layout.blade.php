@@ -27,6 +27,8 @@
             <nav class="flex items-center gap-1 text-sm">
                 <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 rounded-lg hover:bg-slate-800 transition">แดชบอร์ด</a>
                 <a href="{{ route('admin.vehicles.index') }}" class="px-3 py-2 rounded-lg hover:bg-slate-800 transition">จัดการรถ</a>
+                <a href="{{ route('admin.rentals.index') }}" class="px-3 py-2 rounded-lg hover:bg-slate-800 transition">การจอง</a>
+                <a href="{{ route('admin.feedbacks.index') }}" class="px-3 py-2 rounded-lg hover:bg-slate-800 transition">รีวิว</a>
                 <a href="{{ route('vehicles.index') }}" class="px-3 py-2 rounded-lg hover:bg-slate-800 transition">กลับหน้าเว็บ</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -10,11 +10,15 @@
         <div class="grid md:grid-cols-5 gap-6">
             {{-- สรุปรถ --}}
             <div class="md:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden h-fit">
-                <div class="h-40 bg-linear-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white/90" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M18.92 6c-.2-.58-.76-1-1.42-1h-11c-.66 0-1.21.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8z" />
-                    </svg>
-                </div>
+                @if ($vehicle->image_path)
+                    <img src="{{ asset('storage/' . $vehicle->image_path) }}" alt="{{ $vehicle->brand }} {{ $vehicle->model }}" class="h-40 w-full object-cover">
+                @else
+                    <div class="h-40 bg-linear-to-br from-indigo-500 to-indigo-700 flex items-center justify-center">
+                        <svg class="w-20 h-20 text-white/90" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M5 11l1.5-4.5h11L19 11m-1.5 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m-11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M18.92 6c-.2-.58-.76-1-1.42-1h-11c-.66 0-1.21.42-1.42 1L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8z" />
+                        </svg>
+                    </div>
+                @endif
                 <div class="p-5">
                     <span class="text-xs text-indigo-600 font-semibold">{{ $vehicle->vehicleType->name }}</span>
                     <h2 class="text-xl font-bold text-slate-900 mt-1">{{ $vehicle->brand }} {{ $vehicle->model }}</h2>

@@ -19,6 +19,7 @@ class RentalController extends Controller
         $rentals = auth()->user()
             ->rentals()
             ->with('vehicle.vehicleType')
+            ->withCount('feedbacks') // ไว้เช็คว่ารีวิวไปแล้วหรือยัง
             ->latest()
             ->get();
 
@@ -64,7 +65,7 @@ class RentalController extends Controller
         $days = (int) $start->diffInDays($end);
         $totalPrice = $days * $vehicle->daily_rate;
 
-        // transaction: สร้าง rental + อัปเดตสถานะรถ ต้องสำเร็จพร้อมกัน (กฎ 4: ความถูกต้องข้อมูล)
+        // transaction: สร้าง rental + อัปเดตสถานะรถ ต้องสำเร็จพร้อมกัน (กฎ 4)
         DB::transaction(function () use ($vehicle, $start, $end, $totalPrice) {
             $vehicle->rentals()->create([
                 'user_id' => auth()->id(),

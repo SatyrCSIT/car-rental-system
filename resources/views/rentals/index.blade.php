@@ -36,6 +36,14 @@
                 <div class="text-right">
                     <span class="text-xs text-slate-400">ราคารวม</span>
                     <div class="text-xl font-extrabold text-slate-900">{{ number_format($rental->total_price) }} ฿</div>
+                    @if ($rental->status === 'completed')
+                        @if ($rental->feedbacks_count > 0)
+                            <span class="inline-block mt-2 text-xs text-emerald-600">✓ รีวิวแล้ว</span>
+                        @else
+                            <a href="{{ route('feedbacks.create', $rental) }}"
+                                class="inline-block mt-2 text-xs font-medium text-indigo-600 hover:text-indigo-800">เขียนรีวิว →</a>
+                        @endif
+                    @endif
                 </div>
             </div>
         @empty
