@@ -26,6 +26,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // user ใหม่เป็น 'customer' เสมอ (ให้ object ในหน่วยความจำตรงกับ default ของ DB)
+    protected $attributes = [
+        'role' => 'customer',
+    ];
+
     protected function casts(): array
     {
         return [
