@@ -93,13 +93,13 @@
                                 <span class="text-sm text-slate-400">฿ / วัน</span>
                             </div>
                             @if ($vehicle->status === 'available')
-                                {{-- TODO: เชื่อมหน้าจองใน Step E --}}
-                                <button class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                                <a href="{{ route('rentals.create', $vehicle) }}"
+                                    class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
                                     เช่าเลย
                                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                     </svg>
-                                </button>
+                                </a>
                             @else
                                 <button disabled class="bg-slate-100 text-slate-400 text-sm font-medium px-4 py-2.5 rounded-xl cursor-not-allowed">ไม่ว่าง</button>
                             @endif

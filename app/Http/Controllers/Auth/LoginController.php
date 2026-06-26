@@ -38,6 +38,11 @@ class LoginController extends Controller
         // สร้าง session id ใหม่ กัน session fixation (กฎ 4)
         $request->session()->regenerate();
 
+        // แอดมิน -> ไปแดชบอร์ด, ลูกค้า -> หน้าเดิมที่ตั้งใจไป/หน้าแรก
+        if ($request->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         return redirect()->intended(route('vehicles.index'));
     }
 
