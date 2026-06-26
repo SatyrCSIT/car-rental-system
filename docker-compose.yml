@@ -1,0 +1,38 @@
+# Database environment สำหรับโปรเจกต์ Car Rental (MySQL + phpMyAdmin)
+# ค่าทั้งหมดอ่านจากไฟล์ .env (กฎข้อ 2: ห้าม hardcode)
+# วิธีใช้:  docker compose up -d   |   ปิด:  docker compose down
+
+services:
+  # ฐานข้อมูล MySQL
+  mysql:
+    image: mysql:8.4
+    container_name: carrental_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      # เก็บข้อมูลถาวร แม้ลบ container ข้อมูลก็ยังอยู่
+      - mysql_data:/var/lib/mysql
+      # ไฟล์ .sql ในโฟลเดอร์นี้จะถูก import อัตโนมัติ "ครั้งแรก" ที่สร้าง DB
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+
+  # หน้าจัดการฐานข้อมูลผ่าน browser (แทน phpMyAdmin ของ XAMPP)
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: carrental_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "${PMA_PORT}:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:

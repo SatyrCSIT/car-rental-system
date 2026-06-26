@@ -1,0 +1,6 @@
+# ไฟล์ลับ/ค่า config เฉพาะเครื่อง (กฎข้อ 4: ห้ามเปิดเผย credential)
+.env
+
+# ไฟล์ระบบ
+.DS_Store
+Thumbs.db
